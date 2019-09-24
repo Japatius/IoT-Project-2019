@@ -1,28 +1,54 @@
 import smbus
 import time
 import datetime
+import Adafruit_DHT
 from ctypes import c_short
 from ctypes import c_byte
 from ctypes import c_ubyte
 import paho.mqtt.client as mqtt
 import mysql.connector
-from secret import user,passwd
 
 
 DEVICE = 0x76
 
+#GPIO23 for DHT11
+PIN = 23
+
 bus = smbus.SMBus(1)
 
+dht = Adafruit_DHT.DHT11
+DHThumidity, DHTtemperature = Adafruit_DHT.read_retry(dht,PIN)
+
 broker_address = "172.20.240.118"
-
-temp_topic = "weather/temperature"
-press_topic = "weather/pressure"
-hum_topic = "weather/humidity"
-
 client = mqtt.Client("weatherData")
 client.connect(broker_address)
+
+#temp_topic = "weather/temperature"
+#press_topic = "weather/pressure"
+#hum_topic = "weather/humidity"
+
 time_of_date = datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")
 
+def dhtHandler():
+    if DHThumidity is not None:#and DHTtemperature in not None:
+        #if temp. is wanted from DHT11, uncomment line from above and below
+        #print("DHT-Temp.   :  " + str(DHTtemperature) + "C")
+        print("Humidity    :  " + str(DHThumidity) + "%")
+        
+    else:
+        print("Something is wrong with DHT11")
+
+
+def mqttHandler(temperature,humidity,pressure):    
+    try:
+        client.publish('weather/temperature',str(temperature) + " C")
+        client.publish('weather/pressure',str(pressure) + " hPa")
+        client.publish('weather/humidity',str(DHThumidity) + " %")
+    
+    except Exception:
+        print("Something went wrong.")
+        
+    
 
 def getShort(data, index):
 # return two bytes from data as a signed 16-bit value
@@ -148,28 +174,13 @@ def readBME280All(addr=DEVICE):
         humidity = 0
 
     return temperature/100.0,pressure/100.0,humidity
-
-
-
-def mqttHandler(temperature,humidity,pressure):
-    
-    try:
-#        handle = open("values.txt", "w")
-#        handle.write(str(temperature) + ", " + str(pressure) + ", " + str(humidity))
-#        handle.close()
         
-        client.publish(temp_topic,str(temperature) + " C")
-        client.publish(press_topic,str(pressure) + " hPa")
-        client.publish(hum_topic,str(humidity) + " %")
-    
-    except Exception:
-        print("Something went wrong.")
 
 def writeDb(temperature,humidity,pressure):
     mydb = mysql.connector.connect(
         host="172.20.240.118",
-        user=user,
-        passwd=passwd,
+        user="webuser",
+        passwd="admin123",
         database="weatherdata"
         )
     
@@ -187,22 +198,16 @@ def writeDb(temperature,humidity,pressure):
         
 
     print(mycursor.rowcount, "record inserted.")
-
+        
 def main():
-
     temperature,pressure,humidity = readBME280All()
-    time_of_date = datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")
-    
-    #sensors = [str(temperature),str(pressure),str(humidity)]
-    
     print("Data of " + str(time_of_date))
     print("Temperature : ", temperature, "C")
     print("Pressure    : ", pressure, "hPa")
-    print("Humidity    : ", humidity, "%")
-    writeDb(temperature,humidity,pressure)
+    dhtHandler()
+    #writeDb(temperature,humidity,pressure)
     mqttHandler(temperature,humidity,pressure)
     
-
     
 
 if __name__=="__main__":
