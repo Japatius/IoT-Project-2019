@@ -7,6 +7,7 @@ from ctypes import c_byte
 from ctypes import c_ubyte
 import paho.mqtt.client as mqtt
 import mysql.connector
+from db_credentials import hostname, username, password, databasename
 
 
 DEVICE = 0x76
@@ -39,7 +40,7 @@ def dhtHandler():
         print("Something is wrong with DHT11")
 
 
-def mqttHandler(temperature,humidity,pressure):    
+def mqttHandler(temperature,DHThumidity,pressure):    
     try:
         client.publish('weather/temperature',str(temperature) + " C")
         client.publish('weather/pressure',str(pressure) + " hPa")
@@ -176,17 +177,17 @@ def readBME280All(addr=DEVICE):
     return temperature/100.0,pressure/100.0,humidity
         
 
-def writeDb(temperature,humidity,pressure):
+def writeDb(temperature,DHThumidity,pressure):
     mydb = mysql.connector.connect(
-        host="172.20.240.118",
-        user="webuser",
-        passwd="admin123",
-        database="weatherdata"
+        host=hostname,
+        user=username,
+        passwd=password,
+        database=databasename
         )
     
     sql = "INSERT INTO sensorvalues (time_of_date, temperature, humidity, pressure)" \
           "VALUES (%s, %s, %s, %s)"
-    args = (time_of_date,temperature,humidity,pressure)
+    args = (time_of_date,temperature,DHThumidity,pressure)
     
     try:
         mycursor = mydb.cursor()
@@ -205,7 +206,7 @@ def main():
     print("Temperature : ", temperature, "C")
     print("Pressure    : ", pressure, "hPa")
     dhtHandler()
-    #writeDb(temperature,humidity,pressure)
+    writeDb(temperature,DHThumidity,pressure)
     mqttHandler(temperature,humidity,pressure)
     
     
