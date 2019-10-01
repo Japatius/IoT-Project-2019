@@ -1,10 +1,13 @@
 const express = require('express')
 const app = express();
-const port = 3000;
+const port = 3100;
 
 let sensor = require('./routes/sensorvalues');
 
 app.use('/values', sensor)
+app.use('/temperature', sensor)
+app.use('/pressure', sensor)
+app.use('/humidity', sensor)
 
 app.get('/', (req, res) => res.send('Navigate to "/values" for weatherdata'))
 
