@@ -6,7 +6,7 @@ class Header extends Component {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">reactstrap</NavbarBrand>
+                <NavbarBrand href="/">weatherstation</NavbarBrand>
                     <Collapse navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>

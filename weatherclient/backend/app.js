@@ -1,9 +1,11 @@
 const express = require('express')
 const app = express();
 const port = 3100;
+const cors = require('cors');
 
 let sensor = require('./routes/sensorvalues');
 
+app.use(cors());
 app.use('/values', sensor)
 app.use('/temperature', sensor)
 app.use('/pressure', sensor)
