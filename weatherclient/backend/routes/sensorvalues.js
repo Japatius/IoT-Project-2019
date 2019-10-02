@@ -12,6 +12,17 @@ router.get('/', function(req,res) {
     })
 });
 
+router.get('/current', function(req,res) {
+    values.getCurrentValues(function(err,rows) {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(rows)
+        }
+    })
+});
+
+
 router.get('/temperature', function(req,res) {
     values.getTemperature(function(err,rows) {
         if (err) {

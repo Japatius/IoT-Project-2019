@@ -4,59 +4,73 @@ import * as d3 from 'd3'
 import { scaleLinear } from 'd3-scale'
 import { max } from 'd3-array'
 import { select } from 'd3-selection'
+import Chart from 'react-google-charts';
 
-const url = 'http://localhost:3100/values';
+const url = 'http://localhost:3001/values';
 
 class D3_chart extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            dataz: []
+            values: [],
+            temperature: undefined,
+            pressure: undefined,
+            humidity: undefined
         };
 
     }
-    componentDidMount() {
-        this.createBarChart()
-    }
-    componentDidUpdate() {
-        this.createBarChart()
-    }
-    createBarChart() {
-        const node = this.node
-        const dataMax = max(this.props.data)
-        const yScale = scaleLinear()
-           .domain([0, dataMax])
-           .range([0, this.props.size[1]])
-     select(node)
-        .selectAll('rect')
-        .data(this.props.data)
-        .enter()
-        .append('rect')
-     
-     select(node)
-        .selectAll('rect')
-        .data(this.props.data)
-        .exit()
-        .remove()
-     
-     select(node)
-        .selectAll('rect')
-        .data(this.props.data)
-        .style('fill', '#fe9922')
-        .attr('x', (d,i) => i * 25)
-        .attr('y', d => this.props.size[1] - yScale(d))
-        .attr('height', d => yScale(d))
-        .attr('width', 25)
-     }
 
+    // componentDidMount() {
+    //     axios.get(url)
+    //     .then(response => {
+    //         if (response.status === 200 && response != null) {
+    //             this.setState({
+    //                 values: response.data,
+    //                 temperature: response.temperature
+    //             });
+    //             console.log(response.data)
+    //             console.log(response.temperature)
+    //         } else {
+    //             console.log('problem officer :/')
+    //         }
+    //     })
+    //     .catch(error => {
+    //         console.log(error)
+    //     });
+    // }
 
 
     render() {
         return (
-            <svg ref={node => this.node = node}
-                width={500} height={500}>
-            </svg>
+            <div>
+                <Chart
+                    width={500}
+                    height={300}
+                    chartType="ColumnChart"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                      ['City', '2010 Population', '2000 Population'],
+                      ['New York City, NY', 8175000, 8008000],
+                      ['Los Angeles, CA', 3792000, 3694000],
+                      ['Chicago, IL', 2695000, 2896000],
+                      ['Houston, TX', 2099000, 1953000],
+                      ['Philadelphia, PA', 1526000, 1517000],
+                    ]}
+                    options={{
+                      title: 'Population of Largest U.S. Cities',
+                      chartArea: { width: '30%' },
+                      hAxis: {
+                        title: 'Total Population',
+                        minValue: 0,
+                      },
+                      vAxis: {
+                        title: 'City',
+                      },
+                    }}
+                    legendToggle
+                />
+            </div>
         );
     }
 }

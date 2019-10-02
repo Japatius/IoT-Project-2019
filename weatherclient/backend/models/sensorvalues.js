@@ -6,6 +6,10 @@ let values = {
         return db.query('select * from sensorvalues', callback)
     },
 
+    getCurrentValues: function(callback) {
+        return db.query('select * from sensorvalues order by id desc limit 1', callback)
+    },
+
     getTemperature: function(callback) {
         return db.query('select id, temperature from sensorvalues', callback)
     },

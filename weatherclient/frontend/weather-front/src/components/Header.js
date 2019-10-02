@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Route, Router, Link, Switch } from 'react-router-dom';
+import '../stylesheets/Weather.css';
 
 class Header extends Component {
     render() {
@@ -10,12 +12,11 @@ class Header extends Component {
                     <Collapse navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/components/">Components</NavLink>
+                                <NavLink href="/Current/">Current</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                                <NavLink href="https://github.com/Japatius/IoT-Project-2019" target="_blank">GitHub</NavLink>
                             </NavItem>
-
                         </Nav>
                         </Collapse>
                     </Navbar>
