@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../stylesheets/Weather.css';
+import DataChart from './DataChart'
 
 class CurrentWeather extends Component {
 
@@ -17,15 +18,13 @@ class CurrentWeather extends Component {
 			.then(res => res.json())
 			.then(json => this.setState({
 				values: json
-            }))
-	}
+            }));
+	    }
 
 
     render() {
         return (
             <div className="container-fluid">
-                <h4>Current weather inside OAMK window</h4>
-                <hr/>
                 {this.state.values.map( d => (
                     <div className="data-container">
                         {d.temperature} C
@@ -35,6 +34,9 @@ class CurrentWeather extends Component {
                         {d.humidity} %
                     </div>
                 ))}
+                <div>
+                    <DataChart/>
+                </div>
             </div>
         );
     }

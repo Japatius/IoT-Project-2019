@@ -15,15 +15,16 @@ class Weather extends Component {
 			.then(res => res.json())
 			.then(json => this.setState({
 				values: json
-			}))
-	}
+			}));
+		}
     render() {
         return (
             <div className="weather-container">
                 <div className="weather-data">
                     {this.state.values.map(asd => (
 						<p>
-                            {asd.temperature}
+							{asd.temperature} C | {asd.pressure} hPa | {asd.humidity} %
+							<br/>
                             {asd.time_of_date}
 						</p>
 				    ))}

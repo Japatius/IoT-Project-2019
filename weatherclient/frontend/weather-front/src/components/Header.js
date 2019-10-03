@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import { Route, Router, Link, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../stylesheets/Weather.css';
 
 class Header extends Component {
@@ -8,14 +8,18 @@ class Header extends Component {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">weatherstation</NavbarBrand>
+                <NavbarBrand href="/">OWeather</NavbarBrand>
                     <Collapse navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/Current/">Current</NavLink>
+                                <NavLink>
+                                    <Link className="link-item" to="/Historical">Historical</Link>
+                                </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="https://github.com/Japatius/IoT-Project-2019" target="_blank">GitHub</NavLink>
+                                <NavLink href="https://github.com/Japatius/IoT-Project-2019" target="_blank">
+                                    GitHub
+                                </NavLink>
                             </NavItem>
                         </Nav>
                         </Collapse>
