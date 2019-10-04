@@ -8,7 +8,7 @@ class Header extends Component {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">OWeather</NavbarBrand>
+                <NavbarBrand href="/"><b id="orints">O</b>Weather</NavbarBrand>
                     <Collapse navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
