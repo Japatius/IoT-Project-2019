@@ -17,7 +17,7 @@ class Header extends Component {
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="https://github.com/Japatius/IoT-Project-2019" target="_blank">
+                                <NavLink className="link-item" href="https://github.com/Japatius/IoT-Project-2019" target="_blank">
                                     GitHub
                                 </NavLink>
                             </NavItem>

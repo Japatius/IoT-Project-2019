@@ -21,13 +21,11 @@ class DataChart extends Component {
 			humidity: undefined,
 			time: undefined,
 			error: undefined,
+			datatype: {
+				past: '',
+				all: ''
+			}
 		};
-	}
-
-	dataMode = () => {
-		this.setState({
-			datatype: URLhourly
-		})
 	}
 
 	timeData = () => {
@@ -103,7 +101,6 @@ class DataChart extends Component {
 	componentDidMount() {
 		this.populateChart()
 	}
-
 //  componentDidUpdate() {
 //  	this.populateChart()
 //  }
@@ -112,8 +109,6 @@ class DataChart extends Component {
         return (
 			<div classname="container">
 				<div className="chart-container">
-					{/* <Button outline color="primary" onClick={this.dataMode}>Show everything</Button> */}
-
 					<canvas 
 						id="myChart"
 						ref={this.chartRef}

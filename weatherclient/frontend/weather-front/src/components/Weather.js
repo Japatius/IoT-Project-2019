@@ -17,6 +17,7 @@ class Weather extends Component {
 				values: json
 			}));
 		}
+		
     render() {
         return (
             <div className="weather-container">
