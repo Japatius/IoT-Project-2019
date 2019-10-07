@@ -22,6 +22,25 @@ router.get('/current', function(req,res) {
     })
 });
 
+router.get('/pastday', function(req,res) {
+    values.getPastDayValues(function (err,rows) {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(rows)
+        } 
+    })
+});
+
+router.get('/hourly', function(req,res) {
+    values.getHourlyValues(function (err,rows) {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(rows)
+        } 
+    })
+});
 
 router.get('/temperature', function(req,res) {
     values.getTemperature(function(err,rows) {

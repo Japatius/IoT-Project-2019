@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Router, Route, Link, Switch } from 'react-router-dom';
-import DataChart from './components/DataChart';
-import Weather from './components/Weather';
+import { Route } from 'react-router-dom';
 import CurrentWeather from './components/CurrentWeather';
 import Historical from './components/Historical';
 import Header from './components/Header';

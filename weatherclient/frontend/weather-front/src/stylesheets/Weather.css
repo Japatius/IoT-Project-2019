@@ -10,7 +10,18 @@
 
 .data-container {
     text-align: center;
-    padding: 10%;
+    padding: 5%;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 5px;
+}
+
+.data-text {
+
+}
+
+.head-text {
+    float: left;
+    padding: 10px;
 }
 
 .link-style {

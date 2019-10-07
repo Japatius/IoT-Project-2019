@@ -8,6 +8,8 @@ let sensor = require('./routes/sensorvalues');
 app.use(cors());
 app.use('/values', sensor)
 app.use('/current', sensor)
+app.use('/pastday', sensor)
+app.use('/hourly', sensor)
 app.use('/temperature', sensor)
 app.use('/pressure', sensor)
 app.use('/humidity', sensor)

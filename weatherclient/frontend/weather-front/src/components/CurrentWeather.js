@@ -27,11 +27,13 @@ class CurrentWeather extends Component {
             <div className="container-fluid">
                 {this.state.values.map( d => (
                     <div className="data-container">
-                        {d.temperature} C
-                        <br/>
-                        {d.pressure} hPa
-                        <br/>
-                        {d.humidity} %
+                        <div className="data-text">
+                            Temperature: {d.temperature} C
+                            <br/>
+                            Pressure: {d.pressure} hPa
+                            <br/>
+                            Humidity: {d.humidity} %
+                        </div>
                     </div>
                 ))}
                 <div>
