@@ -2,26 +2,43 @@ import React, { Component } from 'react';
 import '../stylesheets/Weather.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DataChart from './DataChart'
-
+import axios from 'axios';
+const URLcurrent = 'http://localhost:3001/values/current';
 class CurrentWeather extends Component {
-
-	state = {
-		values: [],
-		temperature: undefined,
-		pressure: undefined,
-        humidity: undefined,
-        time_of_date: undefined,
-	};
-
+    constructor(props) {
+        super(props);
+	    this.state = {
+		    values: [],
+		    temperature: undefined,
+		    pressure: undefined,
+            humidity: undefined,
+            time_of_date: undefined,
+            modal: false
+        };
+    }
 
 	componentDidMount(){
-		fetch(`http://localhost:3001/values/current`)
-			.then(res => res.json())
-			.then(json => this.setState({
-				values: json
-            }));
-	    }
+		axios.get(URLcurrent)
+			.then(res => {
+				const values = res.data;
+				const temperature = [];
+				const pressure = [];
+				const humidity = [];
+				const time = [];
+				
+				for (let i = 0; i < values.length; i++) {
+					temperature.push(values[i].temperature);
+					pressure.push(values[i].pressure);
+					humidity.push(values[i].humidity);
+					time.push(values[i].time_of_date);
+				}
+				this.setState({
+					values, temperature, pressure, humidity, time
+				});
+            });
+        };
 
+    // <p>°C</p>
 
     render() {
         return (
@@ -31,9 +48,11 @@ class CurrentWeather extends Component {
                         <div className="card-body">
                             <h5 className="card-title">Weather OAMK</h5>
                             <h6 className="card-subtitle mb-2 text-muted">{d.time_of_date}</h6>
-                            <p class="card-text">Temperature: {d.temperature} °C</p>
-                            <p class="card-text">Pressure: {d.pressure} hPa</p>
-                            <p class="card-text">Humidity: {d.humidity} %</p>
+                            <h1 className="card-title">{d.temperature}<p id="celsius"> °C</p></h1>
+                            <div className="value-container">
+                                <p className="card-text" id="data-text">Pressure: {d.pressure} hPa</p>
+                                <p className="card-text" id="data-text">Humidity: {d.humidity} %</p>
+                            </div>
                         </div>
                     </div>
                 ))}

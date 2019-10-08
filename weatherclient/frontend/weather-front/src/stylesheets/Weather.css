@@ -7,6 +7,38 @@
     }
 }
 
+button {
+    border: none;
+    margin: 2px;
+    background-color: white;
+    border-bottom: 1px solid orange;
+}
+
+button:active {
+    background-color: orange;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+  
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+
 .card {
     border: none;
     width: 80%;
@@ -52,6 +84,15 @@
 .link-item:hover {
     color: orange;
     text-decoration: none;
+}
+
+.value-container {
+    display: inline;
+}
+
+#celsius {
+    font-size: 15px;
+    display: inline;
 }
 
 #orints {

@@ -42,6 +42,16 @@ router.get('/hourly', function(req,res) {
     })
 });
 
+router.get('/hourlyall', function(req,res) {
+    values.getAllHourly(function (err,rows) {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json(rows)
+        } 
+    })
+});
+
 router.get('/temperature', function(req,res) {
     values.getTemperature(function(err,rows) {
         if (err) {

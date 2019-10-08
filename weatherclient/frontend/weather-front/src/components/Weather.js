@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import '../stylesheets/Weather.css';
+import Chart from 'chart.js';
 
 class Weather extends Component {
-
     state = {
 		values: [],
 		temperature: undefined,
 		pressure: undefined,
 		humidity: undefined,
+		time_of_date: undefined,
 		error: undefined
 	};
 
@@ -22,13 +24,16 @@ class Weather extends Component {
         return (
             <div className="weather-container">
                 <div className="weather-data">
-                    {this.state.values.map(asd => (
-						<p>
-							{asd.temperature} C | {asd.pressure} hPa | {asd.humidity} %
-							<br/>
-                            {asd.time_of_date}
-						</p>
-				    ))}
+					<table>
+						{this.state.values.map( x => (
+							<tr>
+								<td>{x.time_of_date}</td>
+								<td>{x.temperature}°C</td>
+								<td>{x.pressure} hPa</td>
+								<td>{x.humidity}%</td>
+							</tr>
+						))}
+						</table>
                 </div>
             </div>
         );
