@@ -4,7 +4,7 @@ import '../stylesheets/Weather.css'
 import Chart from 'chart.js';
 import { Button } from 'reactstrap';
 
-const URLall = 'http://localhost:3001/values/hourlyall';
+const URLall = 'http://172.20.240.118:1500/values/hourlyall';
 
 class AllChart extends Component {
 	chartRef = React.createRef();
@@ -74,11 +74,19 @@ class AllChart extends Component {
 						}
 					}
 				});	
-				console.log(this.state.values.length)
 			});
 		}
 
+	average(temperature) {
+		let lasku = temperature;
+		let sum = lasku.reduce((previous, current) => current +=previous);
+		let avg = sum / lasku.length;
+		let pyor = parseFloat(Number(avg).toFixed(2));
+		console.log(pyor)
+	}
+
 	componentDidMount() {
+		this.average()
 		this.populateChart()
 	}
 

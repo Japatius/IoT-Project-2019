@@ -13,7 +13,7 @@ class Weather extends Component {
 	};
 
 	componentDidMount(){
-		fetch(`http://localhost:3001/values`)
+		fetch(`http://172.20.240.118:1500/values`)
 			.then(res => res.json())
 			.then(json => this.setState({
 				values: json

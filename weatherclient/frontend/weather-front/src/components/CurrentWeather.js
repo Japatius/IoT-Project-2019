@@ -3,7 +3,7 @@ import '../stylesheets/Weather.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DataChart from './DataChart'
 import axios from 'axios';
-const URLcurrent = 'http://localhost:3001/values/current';
+const URLcurrent = 'http://172.20.240.118:1500/values/current';
 class CurrentWeather extends Component {
     constructor(props) {
         super(props);

@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../stylesheets/Weather.css'
 import Chart from 'chart.js';
 import { Button } from 'reactstrap';
-let URLhourly = 'http://localhost:3001/values/hourly';
+let URLhourly = 'http://172.20.240.118:1500/values/hourly';
 
 class HourlyChart extends Component {
     chartRef = React.createRef();
