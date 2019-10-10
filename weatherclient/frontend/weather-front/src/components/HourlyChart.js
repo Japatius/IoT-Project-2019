@@ -21,7 +21,7 @@ class HourlyChart extends Component {
 	}
 
 	timeData = () => {
-		return this.state.time.reverse();
+		return this.state.time.reverse();;
 	}
 
 	tempData = () => {
@@ -65,7 +65,7 @@ class HourlyChart extends Component {
 								data: this.humData(),
                                 backgroundColor: '#b3e3ff',
                                 borderColor: '#b3e3ff',
-								fill: false
+								fill: false,
 							},
 							{
 								label: 'Temperature',
@@ -78,6 +78,18 @@ class HourlyChart extends Component {
 						]
 					},
 					options: {
+						responsive: true,
+						layout:{
+							padding:{
+								left: 100,
+								right: 100,
+								top: 0,
+								bottom: 0
+							}
+						},
+						legend: {
+							display: true
+						},
 						scales: {
 							xAxes: [{
 								ticks: {

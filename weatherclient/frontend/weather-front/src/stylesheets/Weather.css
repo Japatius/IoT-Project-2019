@@ -56,7 +56,6 @@ tr:nth-child(even) {
     position: relative;
     width: 80vw;
     height: 35vw;
-    margin: 0 auto;
 }
 
 .data-container {

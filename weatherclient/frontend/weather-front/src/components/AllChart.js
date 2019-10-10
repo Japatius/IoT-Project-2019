@@ -6,17 +6,19 @@ import { Button } from 'reactstrap';
 
 const URLall = 'http://172.20.240.118:1500/values/hourlyall';
 
+let tempArray = [];
+
 class AllChart extends Component {
 	chartRef = React.createRef();
 	constructor(props){
 		super(props);
 		this.state = {
 			values: [],
-			temperature: undefined,
-			pressure: undefined,
-			humidity: undefined,
-			time: undefined,
-			error: undefined
+			temperature: [],
+			pressure: [],
+			humidity: [],
+			time: [],
+			error: []
 		};
 	}
 
@@ -34,6 +36,7 @@ class AllChart extends Component {
 					pressure.push(values[i].pressure);
 					humidity.push(values[i].humidity);
 					time.push(values[i].time_of_date);
+					tempArray.push(values[i].temperature);
 				}
 				this.setState({
 					values, temperature, pressure, humidity, time
@@ -64,6 +67,15 @@ class AllChart extends Component {
 						]
 					},
 					options: {
+						responsive: true,
+						layout:{
+							padding:{
+								left: 100,
+								right: 100,
+								top: 0,
+								bottom: 0
+							}
+						},
 						scales: {
 							xAxes: [{
 								ticks: {
@@ -77,16 +89,7 @@ class AllChart extends Component {
 			});
 		}
 
-	average(temperature) {
-		let lasku = temperature;
-		let sum = lasku.reduce((previous, current) => current +=previous);
-		let avg = sum / lasku.length;
-		let pyor = parseFloat(Number(avg).toFixed(2));
-		console.log(pyor)
-	}
-
 	componentDidMount() {
-		this.average()
 		this.populateChart()
 	}
 
