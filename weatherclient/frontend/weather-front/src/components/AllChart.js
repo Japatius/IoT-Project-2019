@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../stylesheets/Weather.css'
 import Chart from 'chart.js';
-import { Button } from 'reactstrap';
 
 const URLall = 'http://172.20.240.118:1500/values/hourlyall';
-
-let tempArray = [];
 
 class AllChart extends Component {
 	chartRef = React.createRef();
@@ -17,8 +14,7 @@ class AllChart extends Component {
 			temperature: [],
 			pressure: [],
 			humidity: [],
-			time: [],
-			error: []
+			time: []
 		};
 	}
 
@@ -36,7 +32,6 @@ class AllChart extends Component {
 					pressure.push(values[i].pressure);
 					humidity.push(values[i].humidity);
 					time.push(values[i].time_of_date);
-					tempArray.push(values[i].temperature);
 				}
 				this.setState({
 					values, temperature, pressure, humidity, time
@@ -88,14 +83,27 @@ class AllChart extends Component {
 				});	
 			});
 		}
-
+	
 	componentDidMount() {
 		this.populateChart()
+		this.average()
+	}
+
+	average = () => {
+		const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
+		let calc = arrAvg(this.state.temperature);
+		let format = calc.toFixed(2);
+		return (
+			<p>Average temperature: {format.toString()}°C</p>
+		);
 	}
 
 	render(){
 		return (
 			<div className="container">
+				<div className="avg-container">
+					{this.average()}
+				</div>
 				<div className="chart-container">
 					<canvas 
 						id="myChart"

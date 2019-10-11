@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import '../stylesheets/Weather.css'
-import Chart from 'chart.js';
 import AllChart from './AllChart';
 import HourlyChart from './HourlyChart';
 

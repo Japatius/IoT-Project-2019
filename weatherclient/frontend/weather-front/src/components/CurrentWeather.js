@@ -9,11 +9,10 @@ class CurrentWeather extends Component {
         super(props);
 	    this.state = {
 		    values: [],
-		    temperature: undefined,
-		    pressure: undefined,
-            humidity: undefined,
-            time_of_date: undefined,
-            modal: false
+		    temperature: [],
+		    pressure: [],
+            humidity: [],
+            time_of_date: [],
         };
     }
 

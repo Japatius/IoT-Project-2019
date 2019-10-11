@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../stylesheets/Weather.css';
-import Chart from 'chart.js';
 
 class Weather extends Component {
     state = {
