@@ -20,7 +20,7 @@ bus = smbus.SMBus(1)
 dht = Adafruit_DHT.DHT11
 DHThumidity, DHTtemperature = Adafruit_DHT.read_retry(dht,PIN)
 
-broker_address = "172.20.240.118"
+broker_address = hostname
 client = mqtt.Client("weatherData")
 client.connect(broker_address)
 
@@ -42,10 +42,8 @@ def dhtHandler():
 
 def mqttHandler(temperature,DHThumidity,pressure):    
     try:
-        client.publish('weather/temperature',str(temperature) + " C")
-        client.publish('weather/pressure',str(pressure) + " hPa")
-        client.publish('weather/humidity',str(DHThumidity) + " %")
-    
+        client.publish('weather/values',str(temperature) + " " + str(pressure) + " " + str(DHThumidity))
+       
     except Exception:
         print("Something went wrong.")
         
@@ -185,7 +183,7 @@ def writeDb(temperature,DHThumidity,pressure):
         database=databasename
         )
     
-    sql = "INSERT INTO sensorvalues (time_of_date, temperature, humidity, pressure)" \
+    sql = "INSERT INTO raw_values (time_of_date, temperature, humidity, pressure)" \
           "VALUES (%s, %s, %s, %s)"
     args = (time_of_date,temperature,DHThumidity,pressure)
     
