@@ -86,14 +86,33 @@ class AllChart extends Component {
 	componentDidMount() {
 		this.populateChart()
 		this.average()
+		this.minValue()
+		this.maxValue()
+	}
+
+	
+
+	minValue = () => {
+		
+		let min = Math.min.apply(null, this.state.values.map(item => item.temperature))
+		return (
+			<p className="min-max-avg">Minimum temperature: {min}°C</p>
+		)
+	}
+
+	maxValue = () => {
+		let max = Math.max.apply(null, this.state.values.map(item => item.temperature))
+		return (
+			<p className="min-max-avg">Maximum temperature: {max}°C</p>
+		)
 	}
 
 	average = () => {
-		const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
-		let calc = arrAvg(this.state.temperature);
-		let format = calc.toFixed(2);
+		const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length
+		let calc = arrAvg(this.state.temperature)
+		let format = calc.toFixed(2)
 		return (
-			<p>Average temperature: {format.toString()}°C</p>
+			<p className="min-max-avg">Average temperature: {format.toString()}°C</p>
 		);
 	}
 
@@ -102,6 +121,8 @@ class AllChart extends Component {
 			<div className="container">
 				<div className="avg-container">
 					{this.average()}
+					{this.minValue()}
+					{this.maxValue()}
 				</div>
 				<div className="chart-container">
 					<canvas 

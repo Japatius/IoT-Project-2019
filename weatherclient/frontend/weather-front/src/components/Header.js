@@ -13,12 +13,12 @@ class Header extends Component {
                         <Nav className="ml-auto" navbar>
                             <NavItem>
                                 <NavLink>
-                                    <Link className="link-item" to="/Historical">Historical</Link>
+                                    <Link className="link-item" to="/charts">Pressure/Humidity</Link>
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="link-item" href="https://github.com/Japatius/IoT-Project-2019" target="_blank">
-                                    GitHub
+                                <NavLink>
+                                    <Link className="link-item" to="/Historical">Data Table</Link>
                                 </NavLink>
                             </NavItem>
                         </Nav>

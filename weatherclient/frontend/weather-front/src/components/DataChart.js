@@ -32,10 +32,8 @@ class DataChart extends Component {
 				</div>
 				<div className="chart-container">
 					{this.state.toggle === true
-					?
-					<HourlyChart/>
-					:
-					<AllChart/>
+						? <HourlyChart/>
+						: <AllChart/>
 					}
 				</div>
 			</div>

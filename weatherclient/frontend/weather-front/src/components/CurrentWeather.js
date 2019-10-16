@@ -48,7 +48,9 @@ class CurrentWeather extends Component {
                         <div className="card-body">
                             <h5 className="card-title">Weather OAMK</h5>
                             <h6 className="card-subtitle mb-2 text-muted">{d.time_of_date}</h6>
-                            <h1 className="card-title">{d.temperature}<p id="celsius"> °C</p></h1>
+                            <div>
+                                <h1 className="card-title">{d.temperature}<p id="celsius"> °C</p></h1>
+                            </div>
                             <div className="value-container">
                                 <p className="card-text" id="data-text">Pressure: {d.pressure} hPa</p>
                                 <p className="card-text" id="data-text">Humidity: {d.humidity} %</p>
