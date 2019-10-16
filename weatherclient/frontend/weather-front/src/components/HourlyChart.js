@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../stylesheets/Weather.css'
 import Chart from 'chart.js';
-let URLhourly = 'http://172.20.240.118:1500/values/hourly';
+import { urlHourly } from '../Urls';
 
 class HourlyChart extends Component {
     chartRef = React.createRef();
@@ -35,7 +35,7 @@ class HourlyChart extends Component {
 	}
 
 	populateChart() {
-		axios.get(URLhourly)
+		axios.get(urlHourly)
 			.then(res => {
 				const values = res.data;
 				const temperature = [];

@@ -3,7 +3,8 @@ import '../stylesheets/Weather.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DataChart from './DataChart'
 import axios from 'axios';
-const URLcurrent = 'http://172.20.240.118:1500/values/current';
+import { urlCurrent } from '../Urls';
+
 class CurrentWeather extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +18,7 @@ class CurrentWeather extends Component {
     }
 
 	componentDidMount(){
-		axios.get(URLcurrent)
+		axios.get(urlCurrent)
 			.then(res => {
 				const values = res.data;
 				const temperature = [];
